@@ -24,30 +24,37 @@ def menu():
 	return menu_
 
 def novo_usuario(nome,data_nascimento,endereco,cpf):
+
 	nome = nome
 	data_nascimento = data_nascimento
 	endereco = endereco
 	cpf = cpf
 
 	return nome,cpf
+def nova_conta(agencia,conta,usuario,cpf):
 
+	if usuario:
+	
+		return {'Agencia':agencia,'Conta':conta,'Usúario':usuario}
+	
+	
 def filtra_usuario(usuario ,cpf):
   
-  if len(usuario)> 0:
+  if usuario:
   	return usuario[0]['cpf'] == cpf
   else:
     return False
   
 def main():
 	AGENCIA = '0001'
-	CONTA = 1
+	CONTA = 0
 
 	saldo = 0
 	limit_day = 3
 	limit = 500
 	extrato = ""
 	usuario = []
-	conta = []
+	conta_corrente = []
 
 
 	while True:
@@ -102,6 +109,13 @@ def main():
 		elif opcao =='6':
 
 			print('MENU > Nova Conta')
+			if usuario:
+
+				CONTA +=1
+				conta_corrente.append(nova_conta(AGENCIA,CONTA,usuario))
+			
+			print(conta_corrente)
+			
 
 		elif opcao.lower() == "q":
 			print("Tchau")
