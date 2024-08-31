@@ -31,11 +31,16 @@ def novo_usuario(nome,data_nascimento,endereco,cpf):
 	cpf = cpf
 
 	return nome,cpf
-def nova_conta(agencia,conta,usuario,cpf):
+def nova_conta(agencia,conta,usuario):
 
 	if usuario:
 	
 		return {'Agencia':agencia,'Conta':conta,'Usúario':usuario}
+	
+def pesquisa_cpf(usuario,cpf):
+	for i in usuario:
+		if cpf in i.values():
+			return i['nome']
 	
 	
 def filtra_usuario(usuario ,cpf):
@@ -106,13 +111,21 @@ def main():
 
 			print('MENU > Lista Conta')
 
+			for i in conta_corrente:
+				print(i)
+
 		elif opcao =='6':
 
 			print('MENU > Nova Conta')
-			if usuario:
+			cpf = input('Digite o seu Cpf: ')
 
+			if usuario:
 				CONTA +=1
-				conta_corrente.append(nova_conta(AGENCIA,CONTA,usuario))
+				nome = pesquisa_cpf(usuario,cpf)
+				conta_corrente.append(nova_conta(AGENCIA,CONTA,nome))
+				print('Nova conta Salvo com Sucesso')
+			else:
+				print('Conta de Usuario não existe!')
 			
 			print(conta_corrente)
 			
